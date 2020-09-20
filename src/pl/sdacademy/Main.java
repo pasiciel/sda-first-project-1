@@ -6,6 +6,27 @@ public class Main {
 
     public static void main(String[] args) {
 
+        /**
+         * Singleton class because only one hero builder is needed
+         */
+        HeroBuilder hb = HeroBuilder.getInstance();
+//tutaj wywolywany jest testowy bohater, nie trzeba wpisywac statow za kazdym odpaleniem
+        Hero hero = hb.buildHeroForTesting();
+
+        hero.printInfo();
+
+        debugMode = true;
+//        Hero fakeHero = new Hero("Soft P0rn", Sex.MALE,100, 10, 10, 10, 10, 10);
+//        printDebug(":(");
+//        fakeHero.printInfo();
+//        fakeHero.applyDamage((byte) 10);
+//        fakeHero.applyDamage((byte) 10);
+//        fakeHero.applyDamage((byte) 10);
+//        fakeHero.applyDamage((byte) 10);
+//        fakeHero.applyDamage((byte) 10);
+//        printDebug("zaraz zginie");
+
+        System.exit(0);
         ConsoleUtils.debugMode = true;
 
         System.out.println("Just a " + C_PURPLE_UNDERLINED + "RED" + C_RESET + " test...");
@@ -13,9 +34,9 @@ public class Main {
         System.out.println(String.format("%20sD %5s C", 93, "X"));
         System.out.printf("My name is %s%n", "joe");
 
-        HeroBuilder hb = new HeroBuilder();
-        Hero hero = hb.buildHeroForTesting();//hb.buildHero();
-        hero.printInfo();
+      // HeroBuilder hb = new HeroBuilder();
+       // Hero hero = hb.buildHeroForTesting();//hb.buildHero();
+       // hero.printInfo();
 
         String names[] = {"A", "B", "C"};
 

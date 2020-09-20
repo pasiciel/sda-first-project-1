@@ -6,15 +6,26 @@ import java.util.Scanner;
 import static pl.sdacademy.ConsoleUtils.*;
 
 public class HeroBuilder {
+    private static HeroBuilder Instance;
+
+    private HeroBuilder() {
+    }
+
+    public static HeroBuilder getInstance(){
+        if (Instance == null) {
+            Instance = new HeroBuilder();
+        }
+        return Instance;
+    }
 
     public static int skillPoints = 100;
 
     // delete me - ideally - use stub to pass as a parameter - in future reading player builds configs from files etc...
-    public Hero buildHeroForTesting() {
+   public Hero buildHeroForTesting() {
         skillPoints = 0;
         // name, sex, strength, stamina, dexterity, intelligence, wisdom, charisma
         return new Hero("HERCULES", Sex.MALE, 95, 1, 1, 1, 1, 1);
-    }
+   }
 
     public Hero buildHero() {
         System.out.println("skill points left: " + skillPoints);

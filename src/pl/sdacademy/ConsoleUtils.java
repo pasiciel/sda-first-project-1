@@ -1,5 +1,8 @@
 package pl.sdacademy;
 
+import org.w3c.dom.ls.LSOutput;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 public class ConsoleUtils {
@@ -55,6 +58,9 @@ public class ConsoleUtils {
 
         return myObj.nextLine();
     }
+    public static final String c_green(String message){
+        return C_GREEN + message + C_RESET;
+    }
 
     public static int promptForInt(String prompt) {
         Scanner scanner = new Scanner(System.in);
@@ -74,16 +80,16 @@ public class ConsoleUtils {
 
     public static void clearScreen() {
         // clear screen
-        /*try {
+        try {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
 
         // just print 50 empty lines ...
-        //for (int i = 0; i< 50; i++) System.out.println();
+        for (int i = 0; i< 50; i++) System.out.println();
     }
 
     public static void printDebug(String msg) {
