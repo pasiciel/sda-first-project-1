@@ -2,38 +2,71 @@ package pl.sdacademy;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+import static pl.sdacademy.ConsoleUtils.C_RED;
+import static pl.sdacademy.ConsoleUtils.C_RESET;
+
 public class Enemy {
 
     public static int enemiesCount = 0;
 
-    private String name = "unnamed_enemy";
+    String name = "unnamed_enemy";
     private byte health = 100;
+
     private int strength = 1;
     private float baseDamage = 1;
     private float baseBlock = 1;
-    private int coins = 10;
-    private Guild guild = Guild.A;
     private float movementSpeed = 5.0f;
-    private Buff buffs = null;
     private float mana = 10;
 
+    private int coins = 10;
+
+    private Guild guild = Guild.A;
+    private Buff buffs = null;
+
+    private boolean isDead = false;
+
+    public boolean isDead() {
+        return isDead;
+    }
+
+    public byte getHealth() {
+        return health;
+    }
+
     public Enemy() {
+        System.out.println("empty constructor called");
         enemiesCount++;
+    }
+
+    public Enemy(String name) {
+//        super();
+        this();
+        this.name = name;
     }
 
     public void getInfo() {
         System.out.println("name: " + name + "\nhp: " + health);
     }
 
-    public void applyDamage(byte amount) {
-        System.out.println("Dealing " + amount + " damage");
-        health -= amount;
+    public void applyDamage(byte amount, float attackHitChance) {
+        float random = ThreadLocalRandom.current().nextFloat();
+        boolean isHit = attackHitChance < random * 100;
 
-        // przypadek gdy wrog zginal
-        if(health < 0) {
-            health = 0;
+        System.out.println("[DEBUG] random: " + random + " attackChance: " + attackHitChance);
 
-            System.out.println("Enemy: " + name + " is dead!");
+        if (isHit) {
+            System.out.println("Dealing " + C_RED + amount + C_RESET + " damage to " + name);
+            health -= amount;
+
+            // przypadek gdy wrog zginal
+            if(health < 0) {
+                health = 0;
+
+                isDead = true;
+                System.out.println("Enemy: " + name + " is dead!");
+            }
+        } else {
+            System.out.println("Enemy dodged this!");
         }
     }
 
@@ -56,6 +89,14 @@ public class Enemy {
             default:
                 System.out.println("[ERROR] Taunt [" + random +"] does not exist");
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String n) {
+        name = n;
     }
 //    - metoda pozwalająca atakować bohatera
 }
